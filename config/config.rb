@@ -2,7 +2,7 @@ require 'aws-sdk'
 require 'csv'
 require 'ostruct'
 
-csv = CSV.new(File.read(Dir.glob("../*.csv").first), :headers => true, :header_converters => :symbol, :converters => :all)
+csv = CSV.new(File.read(Dir.glob("../config.csv").first), :headers => true, :header_converters => :symbol, :converters => :all)
 @config = OpenStruct.new(csv.to_a.map {|row| row.to_hash }.first)
 
 Aws.config.update({
