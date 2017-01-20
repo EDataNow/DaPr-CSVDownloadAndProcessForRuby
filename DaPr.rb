@@ -10,6 +10,7 @@ Dir.chdir(__dir__) do
         Dir.chdir("#{@config.language}") do
           Dir.mkdir("Incoming") unless Dir.exist?("./Incoming")
           Dir.mkdir("Processed") unless Dir.exist?("./Processed")
+          File.new("./dapr.log.txt", 'w') unless File.file?("./dapr.log.txt")
         end
       end
     end
@@ -45,7 +46,7 @@ Dir.chdir(__dir__) do
       pending_files.each do |folder_name, incoming_files|
         Dir.chdir ("#{folder_name}") do
           incoming_files.each do |file|
-            puts "Download Success - #{file}".gsub("(?:[^-]*-){3}|-#{@config.language}\.csv",'') if resp = s3_client.get_object(
+            (File.open("../../dapr.log.txt", 'a'){|f| f.write "#{DateTime.now} - Download #{file}\n".gsub("(?:[^-]*-){3}|-#{@config.language}\.csv",'')}) if resp = s3_client.get_object(
               response_target: file,
               bucket: bucket_name,
               key: "#{key_prefix}/#{folder_name}/#{file}")

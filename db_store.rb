@@ -50,6 +50,7 @@ Dir.glob('*').each do |folder_name|
         end
 
       end
+      File.open("../../dapr.log.txt", 'a'){|f| f.write "#{DateTime.now} - Processed #{file}\n".gsub("(?:[^-]*-){3}|-#{language}\.csv",'')}
       FileUtils.move(file, "../../Processed/#{folder_name}/")
 
     end
