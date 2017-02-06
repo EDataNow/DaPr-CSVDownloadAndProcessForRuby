@@ -2,9 +2,8 @@ require 'pg'
 require 'csv'
 require 'fileutils'
 
-lessee_id = ARGV[0]
-language = ARGV[1]
-db_connection = PG.connect(dbname: "edn_summaries_#{lessee_id}_#{language}", user: 'vagrant', password: 'vagrant')
+language = ARGV[0]
+db_connection = PG.connect(dbname: "edn_summaries", user: 'vagrant', password: 'vagrant')
 
 class String
   def underscore

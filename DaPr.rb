@@ -54,7 +54,7 @@ Dir.chdir(__dir__) do
         end
       end
 
-      system('ruby', @config.processor, @config.user_name.to_s, @config.language)
+      system('ruby', @config.processor, @config.language)
 
     end
 
