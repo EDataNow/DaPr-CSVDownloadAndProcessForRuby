@@ -10,4 +10,8 @@ Aws.config.update({
   region: @config.region
 })
 
-@config.processor ||= File.expand_path("./db_store.rb")
+if @config.processor
+	@config.processor = File.expand_path(@config.processor)
+else
+	@config.processor ||= File.expand_path("./example.rb")
+end
